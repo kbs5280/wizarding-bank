@@ -4,7 +4,7 @@ require './lib/person.rb'
 
 class PersonTest < Minitest::Test
 
-  def test__person_can_have_name
+  def test_person_can_have_name
     person = Person.new('Minerva')
     assert_equal 'Minerva has been created with 0 galleons in cash.', person.create
   end

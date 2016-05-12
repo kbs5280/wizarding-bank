@@ -15,7 +15,6 @@ class Bank
   end
 
   def open_account(person)
-    @accounts.store(person, @bank_name)
     "An account has been opened for #{person.name} with #{@bank_name}."
   end
 
@@ -39,12 +38,11 @@ class Bank
   end
 
   def transfer(person, trans_bank, amount)
-    if @accounts.has_key?(person)
     if amount > @balance
       "Insufficient funds."
     else
       "#{person.name} has transferred #{amount} galleons from #{@bank_name} to #{trans_bank.bank_name}."
-  end
+    end
   end
 
 

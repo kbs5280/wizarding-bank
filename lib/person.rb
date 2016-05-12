@@ -1,8 +1,8 @@
 require 'pry'
 
 class Person
-  attr_reader :name,
-              :cash_level
+  attr_reader     :name,
+                  :cash_level
 
   def initialize(name, cash_level = 0)
     @name        = name

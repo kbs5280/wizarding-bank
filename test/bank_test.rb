@@ -54,19 +54,21 @@ class BankTest < Minitest::Test
     wizards_bank = Bank.new('Wizards Bank of the Rockies')
     new_wizards_bank = Bank.new('New Wizards Bank')
     person = Person.new("Luna", 1000)
+    assert_equal "An account has been opened for Luna with Wizards Bank of the Rockies.", wizards_bank.open_account(person)
+    assert_equal "An account has been opened for Luna with New Wizards Bank.", new_wizards_bank.open_account(person)
     assert_equal "500 galleons have been deposited into Luna's New Wizards Bank account. Balance: 500 Cash: 500", new_wizards_bank.deposit(person, 500)
     assert_equal "Insufficient funds.", new_wizards_bank.transfer(person, wizards_bank, 5000)
   end
 
-  def test_it_has_to_have_accounts_with_both_bank_to_transfer_money
+  def test_it_has_to_have_accounts_with_both_banks_to_transfer_money
     wizards_bank = Bank.new('Wizards Bank of the Rockies')
     new_wizards_bank = Bank.new('New Wizards Bank')
     person = Person.new("Luna", 1000)
-    wizards_bank.open_account(person)
-    new_wizards_bank.open_account(person)
-    assert_equal "500 galleons have been deposited into Luna's New Wizards Bank account. Balance: 500 Cash: 500", new_wizards_bank.deposit(person, 500)
-    assert_equal "Insufficient funds.", new_wizards_bank.transfer(person, wizards_bank, 5000)
+    person2 = Person.new("Minerva", 1000)
+    assert_equal "An account has been opened for Luna with Wizards Bank of the Rockies.", wizards_bank.open_account(person)
+    assert_equal "An account has been opened for Luna with New Wizards Bank.", new_wizards_bank.open_account(person)
+    assert_equal "500 galleons have been deposited into Luna's Wizards Bank of the Rockies account. Balance: 500 Cash: 500", wizards_bank.deposit(person, 500)
+    assert_equal "Minerva does not have an account with New Wizards Bank.", wizards_bank.transfer(person2, new_wizards_bank, 1)
   end
-
 
 end
